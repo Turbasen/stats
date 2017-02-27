@@ -1,10 +1,10 @@
 'use strict';
 
-const UniversalAnalytics = require('universal-analytics');
+const universalAnalytics = require('universal-analytics');
 
 module.exports = () => (req, res, next) => {
   try {
-    const ua = UniversalAnalytics(process.env.GA_ID);
+    const ua = universalAnalytics(process.env.GA_ID);
     const requestParams = module.exports.getRequestParams(req);
     ua.pageview(requestParams).send((err) => {
       if (err) {
@@ -12,7 +12,7 @@ module.exports = () => (req, res, next) => {
       }
     });
   } catch (err) {
-    console.error(err);
+    console.error(err); // eslint-disable-line no-console
   } finally {
     next();
   }
@@ -31,14 +31,14 @@ module.exports.getRequestParams = function getParams(req) {
     // Custom dimension 2: Query params
     cd2: req.originalUrl.split('?')[1],
     // Custom metric 1: RateLimit usage in percent
-    cm1: req.user.remaining / req.user.limit * 100,
+    cm1: (req.user.remaining / req.user.limit) * 100,
   };
 
   if (req.user.type === 'token') {
     Object.assign(gaParams, {
       uid: req.user.provider,
       an: req.user.app,
-      aid: req.user._id,
+      aid: req.user._id, // eslint-disable-line no-underscore-dangle
     });
   } else if (req.user.type === 'ip') {
     // Don't add any details for anonymous users
