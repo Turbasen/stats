@@ -31,7 +31,7 @@ module.exports.getRequestParams = function getParams(req) {
     // Custom dimension 2: Query params
     cd2: req.originalUrl.split('?')[1],
     // Custom metric 1: RateLimit usage in percent
-    cm1: (req.user.remaining / req.user.limit) * 100,
+    cm1: parseInt((100 - ((req.user.remaining / req.user.limit) * 100)), 10),
   };
 
   if (req.user.type === 'token') {
