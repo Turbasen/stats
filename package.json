@@ -26,8 +26,7 @@
     "user",
     "stats",
     "middleware",
-    "connect",
-    "express"
+    "connect"
   ],
   "author": "Den Norske Turistforening <tekno@dnt.no>",
   "license": "MIT",
@@ -47,7 +46,6 @@
     "eslint-config-airbnb-base": "^4.0.2",
     "eslint-plugin-import": "^1.11.0",
     "eslint-watch": "^3.0.0",
-    "express": "^4.13.4",
     "greenkeeper-postpublish": "^1.0.0",
     "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
