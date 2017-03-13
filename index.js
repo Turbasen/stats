@@ -37,6 +37,7 @@ module.exports.getRequestParams = function getParams(req) {
   if (req.user.type === 'token') {
     Object.assign(gaParams, {
       uid: req.user.provider,
+      cid: req.user.provider,
       an: req.user.app,
       aid: req.user._id, // eslint-disable-line no-underscore-dangle
     });

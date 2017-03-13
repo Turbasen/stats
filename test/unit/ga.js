@@ -28,6 +28,7 @@ describe('Params', () => {
       cd2: 'limit=50',
       cm1: 10,
       uid: 'DNT',
+      cid: 'DNT',
       an: 'UT.no',
       aid: undefined,
       v: 1,
