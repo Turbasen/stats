@@ -7,6 +7,7 @@ const ga = require('../../');
 describe('Params', () => {
   it('are retreived', done => {
     const params = ga.getRequestParams({
+      ip: '127.0.0.1',
       user: {
         type: 'token',
         key: 'abc123',
