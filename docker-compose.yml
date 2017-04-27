@@ -3,6 +3,7 @@ version: '2'
 services:
   node:
     image: node:argon
+    network_mode: 'bridge'
     working_dir: /usr/src/app
     volumes:
       - .:/usr/src/app
