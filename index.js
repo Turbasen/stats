@@ -1,6 +1,13 @@
 'use strict';
 
 const universalAnalytics = require('universal-analytics');
+const StatsD = require('node-statsd');
+
+const statsd = new StatsD({
+  host: process.env.STATSD_HOST || 'localhost',
+  port: process.env.STATSD_PORT || 8125,
+  prefix: process.env.STATSD_PREFIX || 'turbasen.',
+});
 
 module.exports = () => (req, res, next) => {
   try {
@@ -11,6 +18,12 @@ module.exports = () => (req, res, next) => {
         throw new Error(err);
       }
     });
+
+    statsd.increment('http.request.count');
+
+    if (req.user.type === 'token') {
+      statsd.increment(`http.request.count.${req.user.app}`.toLowerCase());
+    }
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   } finally {

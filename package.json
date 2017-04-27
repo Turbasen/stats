@@ -52,6 +52,7 @@
     "node": ">=4.0.0"
   },
   "dependencies": {
+    "node-statsd": "^0.1.1",
     "universal-analytics": "^0.4.9"
   }
 }
