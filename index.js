@@ -17,6 +17,7 @@ try {
 
 module.exports = () => (req, res, next) => {
   try {
+    // Log to GA
     const ua = universalAnalytics(process.env.GA_ID);
     const requestParams = module.exports.getRequestParams(req);
     ua.pageview(requestParams).send((err) => {
@@ -25,6 +26,7 @@ module.exports = () => (req, res, next) => {
       }
     });
 
+    // Log to statsd
     statsd.increment('http.request.count');
 
     if (req.user.type === 'token') {
