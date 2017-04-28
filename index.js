@@ -22,7 +22,7 @@ module.exports = () => (req, res, next) => {
     const requestParams = module.exports.getRequestParams(req);
     ua.pageview(requestParams).send((err) => {
       if (err) {
-        throw new Error(err);
+        console.error(err); // eslint-disable-line no-console
       }
     });
 
