@@ -3,11 +3,17 @@
 const universalAnalytics = require('universal-analytics');
 const StatsD = require('node-statsd');
 
-const statsd = new StatsD({
-  host: process.env.STATSD_HOST || 'localhost',
-  port: process.env.STATSD_PORT || 8125,
-  prefix: process.env.STATSD_PREFIX || 'turbasen.',
-});
+let statsd;
+
+try {
+  statsd = new StatsD({
+    host: process.env.STATSD_HOST || 'localhost',
+    port: process.env.STATSD_PORT || 8125,
+    prefix: process.env.STATSD_PREFIX || 'turbasen.',
+  });
+} catch (err) {
+  console.error(err);
+}
 
 module.exports = () => (req, res, next) => {
   try {
