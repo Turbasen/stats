@@ -31,6 +31,8 @@ module.exports = () => (req, res, next) => {
 
     if (req.user.type === 'token') {
       statsd.increment(`http.request.count.${req.user.app.replace(/[^a-zA-Z0-9]/g, '')}`.toLowerCase());
+    } else {
+      statsd.increment('http.request.count.anonymous');
     }
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
