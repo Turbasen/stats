@@ -30,7 +30,7 @@ module.exports = () => (req, res, next) => {
     statsd.increment('http.request.count');
 
     if (req.user.type === 'token') {
-      statsd.increment(`http.request.count.${req.user.app}`.toLowerCase());
+      statsd.increment(`http.request.count.${req.user.app.replace(/[^a-zA-Z0-9]/g, '')}`.toLowerCase());
     }
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
