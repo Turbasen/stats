@@ -12,7 +12,7 @@ try {
     prefix: process.env.STATSD_PREFIX || 'turbasen.',
   });
 } catch (err) {
-  console.error(err);
+  console.error(err); // eslint-disable-line no-console
 }
 
 module.exports = () => (req, res, next) => {
@@ -30,7 +30,9 @@ module.exports = () => (req, res, next) => {
     statsd.increment('http.request.count');
 
     if (req.user.type === 'token') {
-      statsd.increment(`http.request.count.${req.user.app.replace(/[^a-zA-Z0-9]/g, '')}`.toLowerCase());
+      const appName = req.user.app.replace(/[^a-zA-Z0-9]/g, '');
+
+      statsd.increment(`http.request.count.${appName}`.toLowerCase());
     } else {
       statsd.increment('http.request.count.anonymous');
     }
